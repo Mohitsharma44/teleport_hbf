@@ -14,7 +14,7 @@ struct connInfo {
   u32 sourceIP;
 };
 
-int packetwatch(struct xdp_md *ctx) {
+int hbf(struct xdp_md *ctx) {
 
   // Obtain pointer to data from XDP struct
   void *data = (void *)(long)ctx->data;

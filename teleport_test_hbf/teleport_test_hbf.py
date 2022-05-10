@@ -106,7 +106,7 @@ class HBF:
             if pid:
                 logger.error(f"An instance of HBF is already running with pid: {pid}")
                 sys.exit(2)
-            self.b.attach_xdp(self.iface, self.b.load_func("packetwatch", BPF.XDP))
+            self.b.attach_xdp(self.iface, self.b.load_func("hbf", BPF.XDP))
             self.loadBlocklistFile(self.blocklist_ips_path)
             self.b["callers"].open_ring_buffer(self.parseBPFEvents)
             utils.write_hbf_pid()
