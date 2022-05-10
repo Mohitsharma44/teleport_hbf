@@ -1,0 +1,19 @@
+services:
+  hbf:
+    image: mohitsharma44/hbf:latest
+    environment:
+      - HBF_IFACE=${HBF_IFACE:-eth0}
+      - HBF_TIME_THRESHOLD=${HBF_TIME_THRESHOLD:-1}
+      - HBF_MAX_PORTS=${HBF_MAX_PORTS:-5}
+      - HBF_TIMEOUT_SECONDS=${HBF_TIMEOUT_SECONDS:-300}
+    volumes:
+      # https://github.com/iovisor/bcc/issues/1875#issuecomment-490557082
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /sys/fs/bpf:/sys/fs/bpf
+      - /lib/modules:/lib/modules:ro
+      # - /usr/src:/usr/src:ro
+      - /sys/kernel/debug:/sys/kernel/debug:ro
+    network_mode: "host"
+    privileged: true
+    command:
+      - "start"

@@ -1,0 +1,15 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "bento/ubuntu-18.04"
+    # config.vm.box_version = "20220505.0.0"
+    config.vm.provision :shell, :privileged => false, :path => "install_bcc.sh"
+    config.vm.provision :shell, :privileged => false, :path => "upgrade_kernel.sh"
+    config.vm.provision :shell do |shell|
+      shell.name = 'Rebooting'
+      shell.reboot = true
+    end
+    config.vm.synced_folder "../", "/home/vagrant/teleport-test/"
+  end
+  
