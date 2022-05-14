@@ -12,7 +12,7 @@ sudo apt-get install -y bpfcc-tools "linux-headers-$(uname -r)" \
 # Install docker
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
-sudo usermod -aG vagrant docker
+sudo usermod -aG docker vagrant
 
 curl -fsSL https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-linux-x86_64 -o docker-compose
 chmod +x docker-compose

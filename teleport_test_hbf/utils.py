@@ -17,4 +17,5 @@ def write_hbf_pid():
         fh.write(pid)
 
 def remove_hbf_pid():
-    os.remove(PID_FILE_PATH)
+    if os.path.exists(PID_FILE_PATH):
+        os.remove(PID_FILE_PATH)

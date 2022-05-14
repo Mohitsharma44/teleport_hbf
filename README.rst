@@ -32,14 +32,18 @@ Now you can ssh into the host and test/ develop things.
 
 **Container**
 
-  Not all features are easily accessible in the containerized version yet
+  While HBF is fully functional in container, not all CLI features are easily accessible in the 
+  containerized version yet.
   
   We're using BPF ringbuffer. This feature was addedd in Linux kernel 5.8.
   Make sure your kernel version is >= 5.8
 
 You can build the container using the Dockerfile in `setup <./setup>`_ directory
 
-For e.g.
+.. note:: 
+    
+    If you are unsure, simply follow the following steps after spawning a VM using vagrant following the steps mentioned above
+
 
 .. code-block:: 
   
@@ -66,6 +70,17 @@ You can modify the behavior of the host based firewall by using the following en
 +---------------------+-----------------------------------------------------------------------------------------+----------+
 | HBF_TIMEOUT_SECONDS | Total time to keep the HBF running                                                      | `300`    |
 +---------------------+-----------------------------------------------------------------------------------------+----------+
+
+
+Tests
+-----
+
+.. note:: 
+    Its advisable to first run vagrant up so that there are no environment specific issues
+
+.. code-block:: 
+    
+    make e2e-test
 
 
 License

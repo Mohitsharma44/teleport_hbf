@@ -45,19 +45,24 @@ lint/black: ## check style with black
 
 lint: lint/flake8 lint/black ## check style
 
-test: ## run tests quickly with the default Python
-	python3 setup.py test
-
 dist: clean ## builds source and wheel package
 	python3 setup.py sdist
 	python3 setup.py bdist_wheel
 	ls -l dist
 
 install: clean ## install the package to the active Python's site-packages
+	pip3 install -r requirements_dev.txt
 	python3 setup.py install
+	cp -r teleport_test_hbf/bpf_programs /usr/config/bpf_programs
 
 build-container:  ## build linux container image with hbf packaged in
-	cd setup && docker build -t mohitsharma44/hbf .
+	docker build -f setup/Dockerfile -t mohitsharma44/hbf .
+
+run-hbf:  build-container  ## run HBF in container
+	cd setup && docker-compose up -d
 
 build-vm: ## build linux vm using vagrant with all dependencies for bcc
 	cd setup && vagrant up
+
+e2e-test: install run-hbf  ## run e2e test
+	python3 setup.py test
